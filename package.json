@@ -1,6 +1,6 @@
 {
-  "name": "nuxt-structured-data-exmaples",
-  "version": "1.0.0",
+  "name": "nuxt-structured-data-examples",
+  "version": "0.1.0",
   "private": true,
   "scripts": {
     "dev": "nuxt",

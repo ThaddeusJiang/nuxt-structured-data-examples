@@ -1,11 +1,17 @@
 <template>
-  <section>product</section>
+  <div>
+    <p>{{ product.name }}</p>
+    <img class="img" :src="product.image" />
+  </div>
 </template>
 
 <script>
+import { generate_meta_jsonld } from '../helpers/jsonld'
+import { generate_product_json } from '../packages/jsonld-helpers'
+
 const test_data = {
   name: 'マコン・ヴェルゼ',
-  image: '/images/LC1030012.jpg',
+  image: '/images/LC1030012_2.png',
   description:
     'ピュリニーの至宝であり、世界最高峰の白ワインの造り手。ドメーヌ・ルフレーヴのスタイルを手頃な価格で堪能できるコスパ抜群の白ワイン。',
   sku: 'LC10305803B8',
@@ -22,59 +28,10 @@ const test_data = {
   },
 }
 
-const generate_product_jsonld_script = ({
-  name,
-  description,
-  image,
-  brand,
-  aggregateRating,
-  offers,
-}) => ({
-  type: 'application/ld+json',
-  json: {
-    '@context': 'http://schema.org',
-    '@type': 'Product',
-    name,
-    description,
-    image: [image],
-    sku: '0446310786',
-    mpn: '925872',
-    brand: {
-      '@type': 'Brand',
-      name: brand,
-    },
-    review: {
-      '@type': 'Review',
-      reviewRating: {
-        '@type': 'Rating',
-        ratingValue: '4',
-        bestRating: '5',
-      },
-      author: {
-        '@type': 'Person',
-        name: 'Fred Benson',
-      },
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: aggregateRating.ratingValue,
-      reviewCount: aggregateRating.reviewCount,
-    },
-    offers: {
-      '@type': 'Offer',
-      url: offers.url,
-      priceCurrency: offers.priceCurrency,
-      price: offers.price,
-      priceValidUntil: offers.priceValidUntil,
-      availability: offers.availability,
-    },
-  },
-})
-
 export default {
   fetch() {
     this.product = test_data
-    this.jsonld = generate_product_jsonld_script(test_data)
+    this.jsonld = generate_meta_jsonld(generate_product_json(test_data))
   },
   data() {
     return {
@@ -93,3 +50,10 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.img {
+  width: 400px;
+  height: 400px;
+}
+</style>

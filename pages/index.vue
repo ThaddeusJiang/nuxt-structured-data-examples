@@ -2,25 +2,12 @@
   <div class="container">
     <div>
       <Logo />
-      <h1 class="title">nuxt-structured-data-exmaples</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
+
+      <ul>
+        <li>
+          <nuxt-link to="/product">Product Detail</nuxt-link>
+        </li>
+      </ul>
     </div>
   </div>
 </template>
